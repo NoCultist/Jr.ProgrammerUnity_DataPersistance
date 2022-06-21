@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 
 using UnityEditor;
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuUiController : MonoBehaviour
 {
- 
+    
+    public Text sessionCountDisplay;
 
+    private void Start()
+    {
+        sessionCountDisplay.text = $"Sessions Played: {SessionsManager.SessionCount}";
+    }
     public void Play()
     {
-        SessionsManager.Instance.Load();
         SceneManager.LoadScene(1);
     }
 

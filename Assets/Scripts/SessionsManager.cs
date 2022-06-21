@@ -1,13 +1,20 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 
 using UnityEngine;
 
 public class SessionsManager : MonoBehaviour
 {
-    public static int SessionCount = 0;
+    private static int sessionCount = -1;
+    
+    public static int SessionCount
+    {
+        get
+        {
+            if (sessionCount == -1)
+                Instance.Load();
+            return sessionCount;
+        }
+    }
     public static SessionsManager Instance;
 
     private void Awake()
@@ -21,10 +28,10 @@ public class SessionsManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void SessionIncrement()
+    public static void SessionIncrement()
     {
-        SessionCount++;
-        Debug.Log(SessionCount);
+        sessionCount++;
+        Debug.Log(sessionCount);
     }
 
     [System.Serializable]
@@ -36,7 +43,7 @@ public class SessionsManager : MonoBehaviour
     public void Save()
     {
         SaveData data = new SaveData();
-        data.SessionCount = SessionCount;
+        data.SessionCount = sessionCount;
 
         string json = JsonUtility.ToJson(data);
 
@@ -50,7 +57,7 @@ public class SessionsManager : MonoBehaviour
             string json = File.ReadAllText(path);
             SaveData data = JsonUtility.FromJson<SaveData>(json);
 
-            SessionCount = data.SessionCount;
+            sessionCount = data.SessionCount;
         }
     }
 }

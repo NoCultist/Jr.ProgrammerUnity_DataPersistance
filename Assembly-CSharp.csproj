@@ -58,12 +58,12 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\DeathZone.cs" />
     <Compile Include="Assets\Scripts\Brick.cs" />
+    <Compile Include="Assets\Scripts\SessionsManager.cs" />
     <Compile Include="Assets\Scripts\Paddle.cs" />
     <Compile Include="Assets\Scripts\MainManager.cs" />
     <Compile Include="Assets\Scripts\Ball.cs" />
-    <Compile Include="Assets\MenuUiController.cs" />
-    <Compile Include="Assets\Scripts\SessionsManager.cs" />
-    <Compile Include="Assets\SessionController.cs" />
+    <Compile Include="Assets\Scripts\SessionController.cs" />
+    <Compile Include="Assets\Scripts\MenuUiController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

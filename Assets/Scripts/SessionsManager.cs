@@ -5,7 +5,22 @@ using UnityEngine;
 public class SessionsManager : MonoBehaviour
 {
     private static int sessionCount = -1;
-    
+    public static string PlayerName = "Player";
+    public static string bestPlayerName = "";
+    public static int bestScore = 0;
+
+    public static void SetBestScore(int score, string playerName)
+    {
+        bestPlayerName = playerName;
+        bestScore = score;
+        SessionsManager.Instance.Save();
+    }
+
+    public static void SetPlayerName(string name)
+    {
+        PlayerName = name;
+    }
+
     public static int SessionCount
     {
         get
@@ -38,12 +53,16 @@ public class SessionsManager : MonoBehaviour
     class SaveData
     {
         public int SessionCount;
+        public int bestScore;
+        public string bestPlayerName;
     }
 
     public void Save()
     {
         SaveData data = new SaveData();
         data.SessionCount = sessionCount;
+        data.bestScore = bestScore;
+        data.bestPlayerName = bestPlayerName;
 
         string json = JsonUtility.ToJson(data);
 
@@ -58,6 +77,8 @@ public class SessionsManager : MonoBehaviour
             SaveData data = JsonUtility.FromJson<SaveData>(json);
 
             sessionCount = data.SessionCount;
+            bestScore = data.bestScore;
+            bestPlayerName = data.bestPlayerName;
         }
     }
 }

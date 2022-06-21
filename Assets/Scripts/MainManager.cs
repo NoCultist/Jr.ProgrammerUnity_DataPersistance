@@ -21,6 +21,7 @@ public class MainManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SetMaxScore();
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
 
@@ -70,6 +71,19 @@ public class MainManager : MonoBehaviour
     {
         m_Points += point;
         ScoreText.text = $"Score : {m_Points}";
+        Debug.Log(m_Points + " ||| " + SessionsManager.bestScore);
+        if (m_Points > SessionsManager.bestScore)
+        {
+            Debug.Log("dupa");
+            SessionsManager.SetBestScore(m_Points, SessionsManager.PlayerName);
+            SetMaxScore();
+        }
+    }
+
+    public Text MaxScoreText;
+    void SetMaxScore()
+    {
+        MaxScoreText.text = $"Best Score : {SessionsManager.bestPlayerName} : {SessionsManager.bestScore}";
     }
 
     public void GameOver()

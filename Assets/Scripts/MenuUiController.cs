@@ -9,10 +9,12 @@ public class MenuUiController : MonoBehaviour
 {
     
     public Text sessionCountDisplay;
+    public Text nameDisplay;
 
     private void Start()
     {
         sessionCountDisplay.text = $"Sessions Played: {SessionsManager.SessionCount}";
+        UpdateName(SessionsManager.PlayerName);
     }
     public void Play()
     {
@@ -27,5 +29,10 @@ public class MenuUiController : MonoBehaviour
 #else
         Application.Quit(); // original code to quit Unity player
 #endif
+    }
+
+    public void UpdateName(string name)
+    {
+        nameDisplay.text = name;
     }
 }
